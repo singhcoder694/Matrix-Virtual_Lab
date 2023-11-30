@@ -1,0 +1,17 @@
+/* Example CSS to style the boxes */
+.box {
+    width: 60px; /* Adjust the box width as needed */
+    height:30px; /* Adjust the box height as needed */
+    background-color: black; /* Adjust the box background color as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color:white;
+    border-radius: 5px;
+    border:none;
+}
+.box:focus{
+    box-shadow: 2px 2px 2px 2px white;
+    border:none;
+}

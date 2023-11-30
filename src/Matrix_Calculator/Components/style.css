@@ -1,0 +1,94 @@
+.matrix{
+    display:flex;
+    flex-direction: column;
+    justify-items: center;
+}
+ .matrix .input_area{
+    width:200px;
+    min-height:6em;
+    font-size: 20px;
+    resize:both;
+    margin:auto;
+    background-color: black;
+    color:white;
+}
+ .matrix .input_area::placeholder{
+    font-size: 20px;
+    opacity: 0.3;
+    color:azure;
+}
+.matrix .input_area:focus::placeholder{
+    color:transparent;
+}
+ .matrix .Buttons{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding:5px;
+}
+ .matrix .Buttons button{
+    width:8vw;
+    min-width:fit-content;
+    border-radius: 20px;
+    border:none;
+    background-color: rgb(34, 197, 238);
+    height:25px;
+    color:white;
+}
+ .matrix .Buttons button:hover{
+    background-color: white;
+    color:rgb(34, 197, 238);
+    cursor: pointer;
+    border:1px solid black;
+}
+ .matrix .operations{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center center;
+}
+@media screen and (min-width:200px) and (max-width:1132px){
+    .matrix .operations{
+        grid-template-columns: 1fr;
+        place-items: center center;
+    }
+}
+ .matrix .operations .part1{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+ .matrix .operations .part1 button{
+    width:100%;
+    height:30px;
+    margin:2px;
+    border:none;
+    background-color: rgb(34, 197, 238);
+    color: white;
+    border-radius: 20px;
+}
+ .matrix .operations .part1 button:hover{
+    border:1px solid black;
+    background-color: white;
+    color:rgb(34, 197, 238);
+    cursor: pointer;
+}
+ .matrix .operations .part2{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+}
+ .matrix .operations .part2 button{
+    width:100%;
+    height:30px;
+    margin:2px;
+    border:none;
+    background-color: rgb(34, 197, 238);
+    color: white;
+    border-radius: 20px;
+}
+ .matrix .operations .part2 button:hover{
+    border:1px solid black;
+    background-color: white;
+    color:rgb(34, 197, 238);
+    cursor: pointer;
+}

@@ -1,0 +1,40 @@
+
+.matrix_calc{
+    margin:0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1.5fr 7fr;
+}
+@media screen and (max-width:800px){
+    .matrix_calc{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+.list{
+    list-style: none;
+    margin-left: 0;
+    padding-left: 0px;
+    margin-top:0px;
+}
+.list li{
+    padding-top:10px;
+    padding-bottom: 10px;
+    font-size: 1.3rem;
+    padding-left: 10px;
+    font-weight: bold;
+    color: rgb(202, 202, 88);
+    transition: ease 0.4s all;
+}
+@media screen and (max-width:800px){
+    .list li{
+        text-align: center;
+    }
+}
+.list li:hover{
+    background-color: rgb(34, 197, 238);
+    cursor: pointer;
+    color:white;
+    border:1px solid black;
+} 

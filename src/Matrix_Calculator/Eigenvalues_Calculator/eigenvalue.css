@@ -1,0 +1,65 @@
+.eigenvalue_calculator{
+    margin:0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1.5fr 7fr;
+}
+@media screen and (max-width:800px){
+    .eigenvalue_calculator{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
+.eigen_heading{
+    padding:10px;
+    font-size:30px;
+    color:white;
+    font-weight: 600;
+    text-align: center;
+    margin:10px auto 0px auto;
+    text-decoration: dotted underline;
+}
+.eigen_details{
+    padding:10px;
+    font-size: 20px;
+    color:white;
+    text-align: center;
+    margin-top:0px;
+}
+a{
+    color:antiquewhite;
+    font-family: cursive;
+}
+.find_eigen{
+    font-weight: 600;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    background-color:#4c75af !important;
+}
+fieldset{
+    display: flex;
+    width:fit-content;
+    margin:20px auto;
+}
+.more_options_eigen{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    width:fit-content;
+}
+.more_options_eigen button{
+    margin:3px;
+    width:100%;
+    border-radius: 20px;
+    border:none;
+    background-color: rgb(34, 197, 238);
+    height:25px;
+    color:white;
+}
+.more_options_eigen button:hover{
+    background-color: white;
+    color:rgb(34, 197, 238);
+    cursor: pointer;
+    border:1px solid black;
+}

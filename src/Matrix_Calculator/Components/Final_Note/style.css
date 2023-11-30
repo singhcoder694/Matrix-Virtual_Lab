@@ -1,0 +1,95 @@
+.footer ul li{
+    margin:10px auto;
+    color:white;
+}
+.footer p{
+    font-size: 20px;
+    color:antiquewhite;
+    margin-left:15px;
+}
+.footer .wiki_link{
+    color:antiquewhite;
+    font-family: cursive;
+}
+.mail{
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+}
+.mail .mail_id{
+    color:bisque;
+    text-decoration: underline;
+    font-size: 18px;
+}
+.mail button{
+    margin: 5px auto;
+    height:40px;
+    background-color: rgb(12, 213, 213);
+    border:none;
+    border-radius: 10px;
+    font-weight: bolder;
+}
+.mail button a{
+    color:white;
+}
+.mail button:hover{
+    border:1px solid white;
+    color:white;
+    background-color: rgb(34, 197, 238);
+    cursor:pointer;
+}
+/* CSS OF ARROWS USED */
+.arrow{
+    position: relative;
+    top:2px;
+    text-align: center;
+    color:antiquewhite;
+}
+/* DROP DOWN CONTENT CSS */
+.footer .mathematical_expr{
+    list-style: none;
+    position: relative;
+    left:-18px;
+}
+.footer .mathematical_expr:hover{
+    cursor:pointer;
+    text-decoration: underline;
+    background-color: white ;
+    color:black;
+}
+.show{
+    display:block;
+    background-color: rgb(195, 152, 72);
+    border-radius:25px;
+    box-shadow: whitesmoke 2px 2px 2px 5px;
+    cursor:text;
+}
+.notshow{
+    display:none;
+}
+/* CONTACT CSS */
+.contacts{
+    display: flex;
+    justify-content: center;
+    padding:10px;
+    padding-bottom: 0px;
+}
+.contact_link{
+    margin:3px;
+    font-size:25px;
+}
+.fb{
+    color:#4267B2;
+}
+.twi{
+    color:#1DA1F2;
+}
+.dis{
+    color:#7289DA;
+}
+.share{
+    color:white;
+}
+.home_screen{
+    color:white;
+}
