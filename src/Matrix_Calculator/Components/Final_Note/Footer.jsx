@@ -1,8 +1,8 @@
 import React from "react"
 import { useState } from "react";
-import {FaDonate} from "react-icons/fa";
-import {BiSolidRightArrow,BiLogoFacebookCircle,BiSolidDownArrow,BiLogoDiscordAlt,BiShareAlt,BiLogoTwitter} from "react-icons/bi";
-import {MdOutlineAddToQueue} from "react-icons/md"
+// import {FaDonate} from "react-icons/fa";
+// import {BiSolidRightArrow,BiLogoFacebookCircle,BiSolidDownArrow,BiLogoDiscordAlt,BiShareAlt,BiLogoTwitter} from "react-icons/bi";
+// import {MdOutlineAddToQueue} from "react-icons/md"
 import "./style.css"
 function Footer(){
     const [isArrowDown, setIsArrowDown] = useState(false);
@@ -23,7 +23,7 @@ function Footer(){
     // }
     return (
         <div className="footer">
-            <ul>
+            {/* <ul>
                 <li>Leave extra cells empty to enter non-square matrices.</li>
                 <li className="mathematical_expr" onClick={toggle}>{isArrowDown ? (<BiSolidDownArrow className="arrow" />) : (<BiSolidRightArrow className="arrow" />)} You can use decimal fractions or mathematical expressions:
                 </li>
@@ -54,21 +54,21 @@ function Footer(){
  ↓, →, Backspace and Delete to navigate between cells, Ctrl+C / Ctrl+V to copy / paste matrices respectively.</li>
                 <li><a href="https://en.wikipedia.org/wiki/Drag_and_drop" className="wiki_link" target="_blank">Drag-and-drop</a> matrices from the results, or even from / to a text editor.</li>
                 <li>To learn more about matrices use <a href="https://en.wikipedia.org/wiki/Matrix_(mathematics)" className="wiki_link" target="_blank">Wikipedia.</a></li>
-            </ul>
-            <hr></hr>
-            <div className="mail">
+            </ul> */}
+            {/* <hr></hr> */}
+            {/* <div className="mail">
                 <a href="mailto:matri-tri-ca@yandex.ru" className="mail_id">matri-tri-ca@yandex.ru</a>
                 <button><a href="https://www.paypal.com/donate/?hosted_button_id=AX5FEG5UK5WEG" target="_blank"><FaDonate/> Support</a></button>
-            </div>
-            <div className="contacts">
+            </div> */}
+            {/* <div className="contacts">
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmatrixcalc.org%2F" target="_blank" className="contact_link fb"><BiLogoFacebookCircle/></a>
                 <a href="https://twitter.com/" target="_blank" className="contact_link twi"><BiLogoTwitter/></a>
                 <a href="https://discord.com/" target="_blank" className="contact_link dis" ><BiLogoDiscordAlt/></a>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmatrixcalc.org%2F" target="_blank" className="contact_link share"><BiShareAlt/></a>
                 <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmatrixcalc.org%2F" target="_blank" className="contact_link home_screen"><MdOutlineAddToQueue/></a>
-            </div>
-            <hr></hr>
-            <p onClick={toggle2} className="mathematical_expr" style={{marginTop:"0px"}}>{isArrowDown2 ? (<BiSolidDownArrow className="arrow" />) : (<BiSolidRightArrow className="arrow" />)}Thanks to:</p>
+            </div> */}
+            {/* <hr></hr> */}
+            {/* <p onClick={toggle2} className="mathematical_expr" style={{marginTop:"0px"}}>{isArrowDown2 ? (<BiSolidDownArrow className="arrow" />) : (<BiSolidRightArrow className="arrow" />)}Thanks to:</p>
             <ul className={isActive2? 'show' : 'notshow show'}>
                 <li>Philip Petrov <a href="https://www.cphpvb.net/" className="wiki_link" target="_blank">(https://cphpvb.net)</a> for Bulgarian translation.</li>
                 <li>Manuel Rial Costa for Galego translation.</li>
@@ -79,7 +79,7 @@ function Footer(){
                 <li>Ousama Malouf and Yaseen Ibrahim for Arabic translation.</li>
                 <li><a href="https://marcel-artz.de/" className="wiki_link" target="_blank">Marcel Artz</a> - improving of the German translation.</li>
                 <li><a href="https://www.matricesydeterminantes.com/" className="wiki_link" target="_blank">Marc Gisbert Juàrez</a> - fixing the translation into Catalan.</li>
-            </ul>
+            </ul> */}
         </div>
     )
 }

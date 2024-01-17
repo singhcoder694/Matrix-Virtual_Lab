@@ -1,33 +1,75 @@
 import React, { useState } from "react"
-import {HiLanguage} from "react-icons/hi2"
 import Matrix from "./Components/Matrix";
 import Footer from "./Components/Final_Note/Footer";
-import { BsArrowLeftRight } from "react-icons/bs";
 import "./Home.css"
 import Navbar from "./Components/Final_Note/navbar";
 import Navbar1 from "./Components/Final_Note/navbar1";
+import Answer from "./Components/Modals/Answer/TwoMatrix/Answer";
 function Home(){
-    const [isTick,setTick]=useState(true);
-    function tick(){
-        setTick(!isTick);
+    const [modal,setModal]=useState(false);
+    const [inputValue, setInputValue] = useState('');
+    const [inputValue2, setInputValue2] = useState('');
+    const [operation,setOperation]=useState('');
+    const [answer, setAnswer]=useState([]);
+    const [error,setError]=useState(false);
+    const handelInputChange=(value)=>{
+        setInputValue(value);
     }
+    const handelInputChange2=(value)=>{
+        setInputValue2(value);
+    }
+    const closeModal= ()=>{
+        setModal(false);
+    } 
+    const handleButtonClick = async (e) => {
+        setOperation(e.target.value);
+        const newJoke = {
+            text1:inputValue,
+            text2:inputValue2,
+        };
+        console.log(newJoke)
+        const response= await fetch(`http://localhost:8000/${e.target.value.slice(-3)}`, {
+            method:"POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Accept":"application/json",
+            },
+            body: JSON.stringify(newJoke)
+        })
+        if (response.status === 200) {
+            const answer = await response.json();
+            // setAnswer(ans);
+            setModal(true);
+            // setOperation(e.target.value);
+            if (typeof(answer)==='string'){
+                setError(true);
+                setAnswer(answer);
+            }
+            else{
+                setError(false);
+                setAnswer(answer);
+            }
+            
+        }
+    };
     return (
         <div>
             <Navbar1 />
+            {modal?<Answer closeModal={closeModal} answer={answer} inputValue={inputValue} inputValue2={inputValue2} error={error} operation={operation}/>:null}
             <div className="matrix_calc">
                 <Navbar />
                 <div>
                 <div className="calculations">
-                    <Matrix name="A"/>
+                    <Matrix name="A" onInputChange={handelInputChange}/>
                     <div className="middle_part">
-                        <button className="swap" title="Swap Matrices"><BsArrowLeftRight/></button>
-                        <button className="calc">A x B</button>
-                        <button className="calc">A + B</button>
-                        <button className="calc">A - B</button>
+                        <button className="calc" onClick={handleButtonClick} value="Division div" >A / B</button>
+                        <button className="calc" onClick={handleButtonClick} value="Multiplication mul">A x B</button>
+                        <button className="calc" onClick={handleButtonClick} value="Addition add">A + B</button>
+                        <button className="calc" onClick={handleButtonClick} value="Subtraction sub">A - B</button>
                     </div>
-                    <Matrix name="B"/>
+                    <Matrix name="B" onInputChange={handelInputChange2}/>
                 </div>
-                <div className="expression">
+                {/* <div className="expression">
                     <label for="expressions"></label>
                     <input type="text" list="expressions" name="expressions" id="input_expressions" placeholder="2A+3B"></input>
                     <datalist id="expressions">
@@ -59,24 +101,7 @@ function Home(){
                         <option value="arctan(A)">tan inverse of A</option>
                     </datalist>
                     <button>=</button>
-                </div>
-                <div className="display_decimals">
-                    <div>
-                        <input onClick={tick} type="checkbox" id="display_decimal" value="Display Decimal" />
-                        <label for="display_decimal">Display Decimal</label>
-                        <div className={isTick?"digit_unshow":"digit_show"}>
-                            <select name="digits" id="digits">
-                                <option>Number of Significant digits:</option>
-                                <option>Number of Fraction digits:</option>
-                            </select>
-                            <input type="number" min="1" step="1" placeholder="3" id="value_digits"></input>
-                        </div>
-                    </div>
-                    <div>
-                        <button>Clean</button>
-                        <button>+</button>
-                    </div>
-                </div>
+                </div> */}
                 <hr></hr>
                 <Footer/>
             </div>
