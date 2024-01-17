@@ -6,11 +6,40 @@ import "../Components/style.css"
 import "./eigenvalue.css"
 import TextArea from "../Components/InputFormat/TextArea";
 import InputBox from "../Components/InputFormat/inputBoxes";
-function Eigenvalues(){
+function Eigenvalues(props){
+    const [modal,setModal]=useState(false);
     const [clr,setClr]=useState(false);
     const [count,setCount]=useState(3);
-    const [input,setInput]=useState(true);
     const [isTick,setTick]=useState(true);
+    const [input,setInput]=useState(true);
+    const [inputValue, setInputValue] = useState('');
+    const [operation, setOperation]=useState('');
+    const [answer, setAnswer]=useState([]);
+    const handleInputChange = (value) => {
+        setInputValue(value);
+    };
+    const handleButtonClick = async (e) => {
+        const newJoke = {
+            text:inputValue,
+        };
+        const response= await fetch("http://localhost:8000/evl", {
+            method:"POST",
+            headers: { 
+                "Content-Type": "application/json",
+                "Accept":"application/json",
+            },
+            body: JSON.stringify(newJoke)
+        })
+        if (response.status === 200) {
+            const ans = await response.json();
+            console.log(ans);
+            setAnswer(ans);
+            setModal(true);
+            setOperation(e.target.value);
+        } else {
+            console.error("Failed to add joke");
+        }
+    };
     function Opt(){
         setInput(!input);
     }
@@ -25,12 +54,14 @@ function Eigenvalues(){
         setCount(count-1);
     }
     function clear(){
-        setCount(3);
         setClr(!clr);
     }
     function tick(){
         setTick(!isTick);
     }
+    const closeModal= ()=>{
+        setModal(false);
+    } 
     return (
         <div>
             <Navbar1 />
@@ -41,13 +72,13 @@ function Eigenvalues(){
                     <p className="eigen_details">This calculator allows to find <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors" target="_blank">eigenvalues and eigenvectors</a> using the <a href="https://en.wikipedia.org/wiki/Characteristic_polynomial" target="_blank">Characteristic polynomial</a>.</p>
                     <div className="matrix">
                         {input?<p style={{textAlign:"center", fontSize:"20px", fontWeight:"bold", color:"white"}}>Matrix A:</p>:<p style={{textAlign:"center", fontSize:"20px", fontWeight:"bold", color:"white"}}>Matrix A:{count}x{count}</p>}
-                        {input?<TextArea className="input_area"/>:<InputBox cnt={count} reset={clr}/>}
+                        {input?<TextArea cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange} className="input_area"/>:<InputBox cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange}/>}
                         <div className="Buttons" style={{justifyContent:"center", marginTop:"10px"}}>
                             <button onClick={Opt}>{input?"Cell":"Box"}</button>
                             <button onClick={clear}>Clear</button>
                             {input?<button style={{fontSize:"20px", color:"black", background:"grey", cursor:"none" }} onClick={inc} disabled>+</button>:<button style={{fontSize:"20px"}} onClick={inc}>+</button>}
                             {input?<button style={{fontSize:"20px", color:"black", background:"grey", cursor:"none"}} onClick={dec} disabled>-</button>:<button style={{fontSize:"20px"}} onClick={dec}>-</button>}
-                            <button className="find_eigen">FIND</button>
+                            <button className="find_eigen" onClick={handleButtonClick}>FIND</button>
                         </div>
                     </div>
                     <fieldset>
@@ -59,7 +90,7 @@ function Eigenvalues(){
                             <button>Singular Value Decomposition</button>
                         </div>
                     </fieldset>
-                    <div className="display_decimals">
+                    {/* <div className="display_decimals">
                     <div>
                         <input onClick={tick} type="checkbox" id="display_decimal" value="Display Decimal" />
                         <label for="display_decimal">Display Decimal</label>
@@ -75,7 +106,7 @@ function Eigenvalues(){
                         <button>Clean</button>
                         <button>+</button>
                     </div>
-                    </div>
+                    </div> */}
                     <hr></hr>
                     <Footer />
                 </div>

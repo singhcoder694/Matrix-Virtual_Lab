@@ -67,3 +67,44 @@ hr{
     cursor: pointer;
     border:1px solid black;
 }
+.part_eqn{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+.part_eqn .box{
+    margin:5px;
+}
+.part_eqn label{
+    color:white;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+.part_eqn .plus_sign{
+    margin:auto 10px;
+}
+.eqn_buttons{
+    display: flex;
+    flex-direction: row;
+    padding:10px;
+    max-width:400px;
+    align-content: center;
+    margin:auto auto;
+}
+.eqn_buttons button{
+    width:8vw;
+    min-width:fit-content;
+    border-radius: 20px;
+    border:none;
+    background-color: rgb(34, 197, 238);
+    height:25px;
+    color:white;
+    margin:auto 10px;
+}
+.eqn_buttons button:hover{
+    background-color: white;
+    color:rgb(34, 197, 238);
+    cursor: pointer;
+    border:1px solid black;
+}

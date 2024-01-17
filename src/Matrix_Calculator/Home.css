@@ -221,7 +221,6 @@ input[type=number]::-webkit-outer-spin-button {
 .page_link_css{
     background-color: black;
     color:white !important;
-    box-shadow: 2px 2px 2px 2px white;
 }
 /* LANGUAGE CSS */
 .show_lang{
