@@ -5,7 +5,6 @@ import Navbar1 from "../Components/Final_Note/navbar1";
 import Footer from "../Components/Final_Note/Footer";
 import Answer from "./Answer/Answer";
 function Equations() {
-  const [isTick, setTick] = useState(true);
   const [count, setCount] = useState(3);
   const [clr, setClr] = useState(false);
   const [boxValues, setBoxValues] = useState("");
@@ -21,9 +20,6 @@ function Equations() {
     setBoxValues(Array(count * count).fill(""));
     setBoxValues2(Array(count).fill(""));
   },[clr])
-  function tick() {
-    setTick(!isTick);
-  }
   const closeModal= ()=>{
     setModal(false);
 } 
@@ -201,7 +197,7 @@ function Equations() {
             </div>
           </div> */}
           <hr></hr>
-          <Footer />
+          {/* <Footer /> */}
         </div>
       </div>
     </div>
