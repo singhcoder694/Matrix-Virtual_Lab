@@ -1,20 +1,10 @@
 import React, {useState, useEffect} from 'react'
 
-function Answer_Matrix(array,row,col){
+function Answer_Matrix(array,size){
     var boxes = [];
-    console.log(array,row,col);
-    let j=0;
-    let temp=0;
-    for (let i = 0; i < row; i++) {
-        boxes.push(<input className="box answer_box" key={i} value={array[i+temp]}></input>);
-        if (i==(row-1)){
-            i=-1;
-            j+=1;
-            temp+=col
-        }
-        if (j==col){
-            break;
-        }
+    // console.log(array,size);
+    for (let i = 0; i < size*size; i++) {
+        boxes.push(<input className="box answer_box" key={i} value={array[i]}></input>);
     }
     return boxes;
 }
@@ -23,22 +13,9 @@ function Answer(props) {
     const {error}= props;
     const [array,setArray]=useState([]);
     const [array2,setArray2]=useState([]);
-    const [sign,setSign]=useState("");
     useEffect(()=>{
         const resultArray = inputValue.trim().split(/\s+/).map(Number);
         const resultArray2 = inputValue2.trim().split(/\s+/).map(Number);
-        if (props.operation==="Multiplication "){
-            setSign("x");
-        }
-        if (props.operation==="Addition "){
-            setSign("+");
-        }
-        if (props.operation==="Subtraction "){
-            setSign("-");
-        }
-        if (props.operation==="Division "){
-            setSign("÷");
-        }
         setArray([...resultArray])
         setArray2([...resultArray2])
     },[])
@@ -51,7 +28,7 @@ function Answer(props) {
     })
     const gridStyle = {
         display: 'grid',
-        gridTemplateColumns: `repeat(${props.col}, fit-content(1000px))`, // Adjust the box width as needed
+        gridTemplateColumns: `repeat(${size}, fit-content(1000px))`, // Adjust the box width as needed
         gridGap: '2px', // Adjust the gap between boxes as needed
         placeItems: 'center center',
         margin: 'auto auto',
@@ -70,15 +47,15 @@ function Answer(props) {
                     <p className='head'>{props.operation}</p>
                     <div className='answer'>
                         <div className='ques_matrix' style={gridStyle}>
-                            {Answer_Matrix(array,props.row,props.col)}
+                            {Answer_Matrix(array,size)}
                         </div>
-                        <div className='equal_sign'>{sign}</div>
+                        <div className='equal_sign'>x</div>
                         <div className='ques_matrix' style={gridStyle}>
-                            {Answer_Matrix(array2,props.row,props.col)}
+                            {Answer_Matrix(array2,size)}
                         </div>
                         <div className='equal_sign'>=</div>
                         <div className='ques_matrix' style={gridStyle}>
-                            {Answer_Matrix(answer[0],props.row,props.col)}
+                            {Answer_Matrix(answer[0],size)}
                         </div>
                     </div>
                     <button onClick={closeModal}>OK</button>

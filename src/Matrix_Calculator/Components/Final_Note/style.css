@@ -42,8 +42,6 @@
 .arrow{
     position: relative;
     top:2px;
-    right:5px;
-    left:-1px;
     text-align: center;
     color:antiquewhite;
 }
@@ -65,7 +63,6 @@
     border-radius:25px;
     box-shadow: whitesmoke 2px 2px 2px 5px;
     cursor:text;
-    margin-bottom:20px;
 }
 .notshow{
     display:none;

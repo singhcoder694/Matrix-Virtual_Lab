@@ -62,7 +62,7 @@ function InputBox(props) {
     <div className="inputBoxes" style={gridStyle}>
       {/* Render the grid of boxes */}
       {renderBoxes()}
-      {props.modal?<Answer evl={props.evl} lu={props.lu} chp={props.chp} svd={props.svd} evt={props.evt} cnt={props.count} operation={props.operation} closeModal={closeModal} answer={props.answer} input={input}/>:null}
+      {props.modal?<Answer operation={props.operation} closeModal={closeModal} answer={props.answer} input={input}/>:null}
     </div>
   );
 }

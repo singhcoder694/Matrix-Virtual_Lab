@@ -45,6 +45,9 @@ function Answer(props) {
     useEffect(()=>{
         setArray([...inputValue])
         setArray2([...answer])
+        console.log(answer);
+        console.log(inputValue);
+        console.log(inputValue2);
     },[])
     const size=Math.sqrt(array.length);
     useEffect(()=>{

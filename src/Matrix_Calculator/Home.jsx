@@ -6,21 +6,12 @@ import Navbar from "./Components/Final_Note/navbar";
 import Navbar1 from "./Components/Final_Note/navbar1";
 import Answer from "./Components/Modals/Answer/TwoMatrix/Answer";
 function Home(){
-    const reference=[
-        ["Determinant", "images/determinant.jpeg"],
-        ["Adjoint", "images/adjoint.jpeg"],
-        ["Addition", "images/addition.jpeg"],
-        ["Inverse", "images/inverse.jpeg"],
-        ["Row Reduced Echelon Form", "images/rre.jpeg"],
-    ]
     const [modal,setModal]=useState(false);
     const [inputValue, setInputValue] = useState('');
     const [inputValue2, setInputValue2] = useState('');
     const [operation,setOperation]=useState('');
     const [answer, setAnswer]=useState([]);
     const [error,setError]=useState(false);
-    const [dim1,setDim1]=useState(0);
-    const [dim2,setDim2]=useState(0);
     const handelInputChange=(value)=>{
         setInputValue(value);
     }
@@ -31,28 +22,12 @@ function Home(){
         setModal(false);
     } 
     const handleButtonClick = async (e) => {
-        setOperation(e.target.value.slice(0,-3));
-        let row=0;
-        let col=0;
+        setOperation(e.target.value);
         const newJoke = {
             text1:inputValue,
             text2:inputValue2,
         };
-        console.log(Array.from(inputValue));
-        for (let i=0;i<(Array.from(inputValue).length);i+=1){
-            if (inputValue[i]=="\n"){
-                
-                row+=1;
-            }
-            else if (inputValue[i]==' '){
-                continue
-            }
-            else if(row==0){
-                col+=1;
-            }
-        }
-        row+=1;
-        console.log(row,col);
+        console.log(newJoke)
         const response= await fetch(`http://localhost:8000/${e.target.value.slice(-3)}`, {
             method:"POST",
             headers: { 
@@ -72,10 +47,7 @@ function Home(){
             }
             else{
                 setError(false);
-                console.log(answer);
                 setAnswer(answer);
-                setDim1(row);
-                setDim2(col);
             }
             
         }
@@ -83,7 +55,7 @@ function Home(){
     return (
         <div>
             <Navbar1 />
-            {modal?<Answer closeModal={closeModal} row={dim1} col={dim2} answer={answer} inputValue={inputValue} inputValue2={inputValue2} error={error} operation={operation}/>:null}
+            {modal?<Answer closeModal={closeModal} answer={answer} inputValue={inputValue} inputValue2={inputValue2} error={error} operation={operation}/>:null}
             <div className="matrix_calc">
                 <Navbar />
                 <div>
@@ -131,7 +103,7 @@ function Home(){
                     <button>=</button>
                 </div> */}
                 <hr></hr>
-                <Footer reference={reference}/>
+                <Footer/>
             </div>
             </div>
         </div>
