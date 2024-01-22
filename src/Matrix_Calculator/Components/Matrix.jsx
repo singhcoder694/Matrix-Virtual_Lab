@@ -33,7 +33,6 @@ function Matrix(props){
         })
         if (response.status === 200) {
             const ans = await response.json();
-            console.log(ans)
             setAnswer(ans);
             setModal(true);
         } else {
@@ -75,13 +74,13 @@ function Matrix(props){
                     <button onClick={handleButtonClick} value="Transpose tsp">Transpose</button>
                     <button onClick={handleButtonClick} value="Adjoint adj">Adjoint</button>
                     <button onClick={handleButtonClick}  value="Cofactor cft">Cofactor</button>
-                    <button onClick={handleButtonClick}  value="Type Of Matrix typ">Type of Matrix</button>
+                    <button onClick={handleButtonClick}  value="Minor mnr">Minor</button>
                 </div>
                 <div className="part2">
                     <button onClick={handleButtonClick} value="Inverse inv">Inverse</button>
                     <button onClick={handleButtonClick}  value="Diagonalise dig">Diagonalise</button>
                     <button onClick={handleButtonClick} value="Trace trc">Trace</button>
-                    <button onClick={handleButtonClick} value="Trace ref">Row Echelon Form</button>
+                    <button onClick={handleButtonClick} value="Row Echelon Form ref">Row Echelon Form</button>
                     <button onClick={handleButtonClick} value="Row Reduced Echelon Form rre">Row Reduced Echelon Form</button>
                     {/* <button onClick={handleButtonClick}  value="Cholesky Decomposition svd">Cholesky Decomposition</button>
                     <button onClick={handleButtonClick}  value="LU Decomposition lud">LU decomposition</button> */}
