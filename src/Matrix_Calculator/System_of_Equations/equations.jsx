@@ -1,33 +1,33 @@
+// eslint-disable-next-line react-hooks/exhaustive-deps
 import { React, useState, useEffect } from "react";
 import "./equations.css";
 import Navbar from "../Components/Final_Note/navbar";
 import Navbar1 from "../Components/Final_Note/navbar1";
-import Footer from "../Components/Final_Note/Footer";
 import Answer from "./Answer/Answer";
 function Equations() {
   const [count, setCount] = useState(3);
   const [clr, setClr] = useState(false);
   const [boxValues, setBoxValues] = useState("");
   const [boxValues2, setBoxValues2] = useState("");
-  const [modal, setModal]=useState(false)
-  const [answer, setAnswer]=useState([]);
-  const [error,setError]=useState(false);
-  useEffect(()=>{
+  const [modal, setModal] = useState(false);
+  const [answer, setAnswer] = useState([]);
+  const [error, setError] = useState(false);
+  useEffect(() => {
     setBoxValues(Array(count * count).fill(""));
     setBoxValues2(Array(count).fill(""));
-  },[count])
-  useEffect(()=>{
+  }, [count]);
+  useEffect(() => {
     setBoxValues(Array(count * count).fill(""));
     setBoxValues2(Array(count).fill(""));
-  },[clr])
-  const closeModal= ()=>{
+  }, [clr]);
+  const closeModal = () => {
     setModal(false);
-} 
+  };
   function inc() {
     setCount(count + 1);
   }
   function dec() {
-    if (count == 1) {
+    if (count === 1) {
       alert("Matrix of 0x0 is not valid.");
       return;
     }
@@ -36,18 +36,16 @@ function Equations() {
   function clear() {
     setClr(!clr);
   }
-  useEffect(()=>{
-      
-  },[clr])
+  useEffect(() => {}, [clr]);
   const handleButtonClick = async (e) => {
     let newJoke;
-    if (boxValues && boxValues2){
-        newJoke = {
+    if (boxValues && boxValues2) {
+      newJoke = {
         text1: boxValues.join(" "),
         text2: boxValues2.join(" "),
       };
     }
-    
+
     const response = await fetch("http://localhost:8000/sol", {
       method: "POST",
       headers: {
@@ -60,38 +58,34 @@ function Equations() {
       const answer = await response.json();
       // setAnswer(ans);
       setModal(true);
-      console.log(answer[0]);
       // setOperation(e.target.value);
-      if (typeof(answer)==='string'){
-          setError(true);
-          setAnswer(answer);
+      if (typeof answer === "string") {
+        setError(true);
+        setAnswer(answer);
+      } else {
+        setError(false);
+        setAnswer(answer[0]);
       }
-      else{
-          setError(false);
-          setAnswer(answer[0]);
-      }
-      
-  }
+    }
   };
   const handleBoxChange = (index, value) => {
     const newBoxValues = [...boxValues];
-    if (value[value.length - 1] == " ") {
+    if (value[value.length - 1] === " ") {
       return;
     }
     newBoxValues[index] = value;
-    console.log(count)
-    if ((index + 1) % count == 0 && index + 1 != count * count) {
+    if ((index + 1) % count === 0 && index + 1 !== count * count) {
       newBoxValues[index] += "\n";
     }
     setBoxValues([...newBoxValues]);
   };
   const handleBoxChange2 = (index, value) => {
     const newBoxValues = [...boxValues2];
-    if (value[value.length - 1] == " ") {
+    if (value[value.length - 1] === " ") {
       return;
     }
     newBoxValues[index] = value;
-    if ((index + 1) % count != 0) {
+    if ((index + 1) % count !== 0) {
       newBoxValues[index] += "\n";
     }
     setBoxValues2([...newBoxValues]);
@@ -102,17 +96,17 @@ function Equations() {
       <div className="part_eqn">
         <input
           className="box"
-          key={index+"1"}
+          key={index + "1"}
           value={boxValues[index]}
           onChange={(e) => handleBoxChange(index, e.target.value)}
         />
-        <label>x{ind == count ? (ind = 1) : ++ind}</label>
-        {ind != count ? <label className="plus_sign">+</label> : null}
-        {ind == count ? <label className="equal_sign">=</label> : null}
-        {ind == count ? (
+        <label>x{ind === count ? (ind = 1) : ++ind}</label>
+        {ind !== count ? <label className="plus_sign">+</label> : null}
+        {ind === count ? <label className="equal_sign">=</label> : null}
+        {ind === count ? (
           <input
             className="box"
-            key={index+"2"}
+            key={index + "2"}
             value={boxValues2[(index + 1) / count - 1]}
             onChange={(e) =>
               handleBoxChange2((index + 1) / count - 1, e.target.value)
@@ -133,7 +127,15 @@ function Equations() {
   return (
     <div>
       <Navbar1 />
-      {modal?<Answer closeModal={closeModal} answer={answer} inputValue={boxValues} inputValue2={boxValues2} error={error}/>:null}
+      {modal ? (
+        <Answer
+          closeModal={closeModal}
+          answer={answer}
+          inputValue={boxValues}
+          inputValue2={boxValues2}
+          error={error}
+        />
+      ) : null}
       <div className="system_of_eqns">
         <Navbar />
         <div className="eqn_jsx">
@@ -155,49 +157,9 @@ function Equations() {
             <button style={{ fontSize: "20px" }} onClick={dec}>
               -
             </button>
-          </div>
-          <div className="solve_deter">
-            <select>
-              <option>Solve By Linear Least Squares Method</option>
-              <option>Solve By Gaussian Elimination</option>
-              <option>Solve By Gauss-Jordan Elimination</option>
-              <option>Solve By Cramer's Rule</option>
-              <option>Solve Using the Inverse Matrix</option>
-              <option>Montante's Method (Bareiss Algorithm)</option>
-              <option>Test for Compatibility</option>
-            </select>
             <button onClick={handleButtonClick}>Solve</button>
           </div>
-          {/* <div className="display_decimals">
-            <div>
-              <input
-                onClick={tick}
-                type="checkbox"
-                id="display_decimal"
-                value="Display Decimal"
-              />
-              <label for="display_decimal">Display Decimal</label>
-              <div className={isTick ? "digit_unshow" : "digit_show"}>
-                <select name="digits" id="digits">
-                  <option>Number of Significant digits:</option>
-                  <option>Number of Fraction digits:</option>
-                </select>
-                <input
-                  type="number"
-                  min="1"
-                  step="1"
-                  placeholder="3"
-                  id="value_digits"
-                ></input>
-              </div>
-            </div>
-            <div>
-              <button>Clean</button>
-              <button>+</button>
-            </div>
-          </div> */}
           <hr></hr>
-          {/* <Footer /> */}
         </div>
       </div>
     </div>

@@ -6,7 +6,6 @@ function perSquare(num) {
 }
 function Answer_Matrix(array,size){
     var boxes = [];
-    // console.log(array,size);
     if (size==1){
         boxes.push(<input className="box answer_box" key={1} value={array}></input>);
         return boxes;
@@ -34,7 +33,6 @@ function valid_array(array){
 function Answer(props) {
     const {closeModal, input, answer}= props;
     const [array,setArray]=useState([]);
-    console.log(input);
     useEffect(()=>{
         const resultArray = input.trim().split(/\s+/).map(Number);
         setArray([...resultArray])
