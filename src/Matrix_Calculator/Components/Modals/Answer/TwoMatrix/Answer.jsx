@@ -2,17 +2,16 @@ import React, {useState, useEffect} from 'react'
 
 function Answer_Matrix(array,row,col){
     var boxes = [];
-    console.log(array,row,col);
     let j=0;
     let temp=0;
     for (let i = 0; i < row; i++) {
         boxes.push(<input className="box answer_box" key={i} value={array[i+temp]}></input>);
-        if (i==(row-1)){
+        if (i===(row-1)){
             i=-1;
             j+=1;
             temp+=col
         }
-        if (j==col){
+        if (j===col){
             break;
         }
     }
@@ -42,7 +41,6 @@ function Answer(props) {
         setArray([...resultArray])
         setArray2([...resultArray2])
     },[])
-    const size=Math.sqrt(array.length);
     useEffect(()=>{
         document.body.style.overflowY="hidden";
         return ()=>{

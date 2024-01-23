@@ -1,8 +1,6 @@
 import React from "react"
-import { useState } from "react";
 import "./navbar1.css"
 function Navbar1(){
-    const [lang, setLang]=useState(false);
     return (
         <div>
             <div className="NavBar">

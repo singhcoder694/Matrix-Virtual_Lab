@@ -12,6 +12,7 @@ function Matrix(props){
     const [inputValue, setInputValue] = useState('');
     const [operation, setOperation]=useState('');
     const [answer, setAnswer]=useState([]);
+    const [error, setError]=useState(false);
     // Callback function to update the input value
     const handleInputChange = (value) => {
         setInputValue(value);
@@ -33,6 +34,12 @@ function Matrix(props){
         })
         if (response.status === 200) {
             const ans = await response.json();
+            if (ans[0]==="M"){
+                setError(true);
+            }
+            else{
+                setError(false);
+            }
             setAnswer(ans);
             setModal(true);
         } else {
@@ -46,7 +53,7 @@ function Matrix(props){
         setCount(count+1);
     }
     function dec(){
-        if (count==1){
+        if (count===1){
             alert("Matrix of 0x0 is not valid.");
             return;
         }
@@ -61,7 +68,7 @@ function Matrix(props){
     return (
         <div className="matrix">
             {input?<p style={{textAlign:"center", fontSize:"20px", fontWeight:"bold", color:"white"}}>Matrix {props.name}</p>:<p style={{textAlign:"center", fontSize:"20px", fontWeight:"bold", color:"white"}}>Matrix {props.name}:{count}x{count}</p>}
-            {input?<TextArea cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange} className="input_area"/>:<InputBox cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange}/>}
+            {input?<TextArea error={error} cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange} className="input_area"/>:<InputBox error={error} cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange}/>}
             <div className="Buttons">
                 <button onClick={Opt}>{input?"Cell":"Box"}</button>
                 <button onClick={clear}>Clear</button>

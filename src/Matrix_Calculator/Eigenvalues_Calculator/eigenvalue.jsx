@@ -14,6 +14,7 @@ function Eigenvalues(){
         ["Dominant Eigen Vector", "images/dominant_eigenvector.jpeg"],
         ["Characteristic Polynomial", "images/characteristic_polynomial.jpeg"],
         ["LU Decomposition", "images/LU_decomposition.jpeg"],
+        ["Singular Value Decomposition", "images/Singular_Value_Decomposition.jpeg"]
     ]
     const [modal,setModal]=useState(false);
     const [clr,setClr]=useState(false);
@@ -27,6 +28,7 @@ function Eigenvalues(){
     const [evt, setEvt]=useState(false);
     const [chp, setChp]=useState(false);
     const [evl, setEvl]=useState(false);
+    const [error, setError]=useState(false);
     const handleInputChange = (value) => {
         setInputValue(value);
     };
@@ -38,6 +40,7 @@ function Eigenvalues(){
             setSVD(false);
             setChp(false);
             setEvl(false);
+            setError(false);
         }
         if (e.target.value.slice(-3)==="evl"){
             setEvt(false);
@@ -45,6 +48,7 @@ function Eigenvalues(){
             setSVD(false);
             setChp(false);
             setEvl(true);
+            setError(false);
         }
         if (e.target.value.slice(-3)==="lud"){
             setEvt(false);
@@ -52,6 +56,7 @@ function Eigenvalues(){
             setSVD(false);
             setChp(false);
             setEvl(false);
+            setError(false);
         }
         if (e.target.value.slice(-3)==="svd"){
             setEvt(false);
@@ -59,6 +64,7 @@ function Eigenvalues(){
             setSVD(true);
             setChp(false);
             setEvl(false);
+            setError(false);
         }
         if (e.target.value.slice(-3)==="chp"){
             setEvt(false);
@@ -66,11 +72,11 @@ function Eigenvalues(){
             setSVD(false);
             setChp(true);
             setEvl(false);
+            setError(false);
         }
         const newJoke = {
             text:inputValue,
         };
-        console.log(newJoke);
         const response= await fetch(`http://localhost:8000/${e.target.value.slice(-3)}`, {
             method:"POST",
             headers: { 
@@ -81,6 +87,9 @@ function Eigenvalues(){
         })
         if (response.status === 200) {
             const ans = await response.json();
+            if (ans[0]==="M"){
+                setError(true);
+            }
             setAnswer(ans);
             setModal(true);
         } else {
@@ -94,7 +103,7 @@ function Eigenvalues(){
         setCount(count+1);
     }
     function dec(){
-        if (count==1){
+        if (count===1){
             alert("Matrix of 0x0 is not valid.");
             return;
         }
@@ -113,10 +122,10 @@ function Eigenvalues(){
                 <Navbar />
                 <div className="eigen_calc">
                     <p className="eigen_heading">Finding of eigenvalues and eigenvectors</p>
-                    <p className="eigen_details">This calculator allows to find <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors" target="_blank">eigenvalues and eigenvectors</a> using the <a href="https://en.wikipedia.org/wiki/Characteristic_polynomial" target="_blank">Characteristic polynomial</a>.</p>
+                    <p className="eigen_details">This calculator allows to find <strong>eigenvalues and eigenvectors</strong> using the <strong>Characteristic polynomial</strong>.</p>
                     <div className="matrix">
                         {input?<p style={{textAlign:"center", fontSize:"20px", fontWeight:"bold", color:"white"}}>Matrix A</p>:<p style={{textAlign:"center", fontSize:"20px", fontWeight:"bold", color:"white"}}>Matrix A:{count}x{count}</p>}
-                        {input?<TextArea evl={evl} lu={lu} chp={chp} svd={svd} evt={evt} cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange} className="input_area"/>:<InputBox evl={evl} lu={lu} chp={chp} svd={svd} evt={evt} cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange}/>}
+                        {input?<TextArea error={error} evl={evl} lu={lu} chp={chp} svd={svd} evt={evt} cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange} className="input_area"/>:<InputBox error={error} evl={evl} lu={lu} chp={chp} svd={svd} evt={evt} cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange}/>}
                         <div className="Buttons" style={{justifyContent:"center", marginTop:"10px"}}>
                             <button onClick={Opt}>{input?"Cell":"Box"}</button>
                             <button onClick={clear}>Clear</button>
