@@ -16,7 +16,7 @@ Once you have downloaded the files and placed them into one folder, navigate thr
 
 In another terminal window, navigate to to the folder containing the downloaded files, and run the following command:
 
-Check if backend is running by navigating to [http://localhost:8080](http://localhost:8080), it should show a blank screen with random message.
+Check if backend is running by navigating to [http://localhost:8000](http://localhost:8000), it should show a blank screen with random message.
 
 ### `npm install` (First Command to install node modules needed to host it locally)
 
