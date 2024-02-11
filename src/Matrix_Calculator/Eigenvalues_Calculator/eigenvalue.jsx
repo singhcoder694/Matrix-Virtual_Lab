@@ -77,7 +77,7 @@ function Eigenvalues(){
         const newJoke = {
             text:inputValue,
         };
-        const response= await fetch(`http://localhost:8000/${e.target.value.slice(-3)}`, {
+        const response= await fetch(`https://matrix-calculator-backend.onrender.com/${e.target.value.slice(-3)}`, {
             method:"POST",
             headers: { 
                 "Content-Type": "application/json",
@@ -143,23 +143,6 @@ function Eigenvalues(){
                             <button onClick={handleButtonClick} value="Singular Value Decomposition svd">Singular Value Decomposition</button>
                         </div>
                     </fieldset>
-                    {/* <div className="display_decimals">
-                    <div>
-                        <input onClick={tick} type="checkbox" id="display_decimal" value="Display Decimal" />
-                        <label for="display_decimal">Display Decimal</label>
-                        <div className={isTick?"digit_unshow":"digit_show"}>
-                            <select name="digits" id="digits">
-                                <option>Number of Significant digits:</option>
-                                <option>Number of Fraction digits:</option>
-                            </select>
-                            <input type="number" min="1" step="1" placeholder="3" id="value_digits"></input>
-                        </div>
-                    </div>
-                    <div>
-                        <button>Clean</button>
-                        <button>+</button>
-                    </div>
-                    </div> */}
                     <hr></hr>
                     <Footer reference={reference}/>
                 </div>
@@ -168,4 +151,3 @@ function Eigenvalues(){
     )
 }
 export default Eigenvalues;
-// [[[-0.3756403450849266, -0.5377052066737049, -0.754829412424069, -0.5611720930621766, -0.5162182007692336, 0.6469966392206304, -0.7375501427785723, 0.6666272421005333, -0.10783277320343831]], [9.331345372310293, 2.4343363659657435, 4.1406292727526214e-16], [[-0.5557328593248969, -0.5770869393013833, -0.5984410192778699, 0.7242198025460967, 0.017435533289658557, -0.6893487359667801, -0.408248290463863, 0.816496580927726, -0.4082482904638628]]]
