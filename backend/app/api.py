@@ -8,7 +8,7 @@ from pydantic import BaseModel
 app = FastAPI()
 
 origins = [
-    "http://localhost:3000"
+    "https://matrix-calculator-frontend.onrender.com"
 ]
 class JokeInput(BaseModel):
     text: str
