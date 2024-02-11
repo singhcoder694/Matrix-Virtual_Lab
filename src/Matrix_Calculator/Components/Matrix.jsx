@@ -24,7 +24,7 @@ function Matrix(props){
         const newJoke = {
             text:inputValue,
         };
-        const response= await fetch(`http://localhost:8000/${e.target.value.slice(-3)}`, {
+        const response= await fetch(`https://matrix-calculator-backend.onrender.com/${e.target.value.slice(-3)}`, {
             method:"POST",
             headers: { 
                 "Content-Type": "application/json",
