@@ -46,7 +46,7 @@ function Equations() {
       };
     }
 
-    const response = await fetch("http://localhost:8000/sol", {
+    const response = await fetch("https://matrix-calculator-backend.onrender.com/sol", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
