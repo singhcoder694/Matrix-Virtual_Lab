@@ -13,6 +13,9 @@ function Matrix(props){
     const [operation, setOperation]=useState('');
     const [answer, setAnswer]=useState([]);
     const [error, setError]=useState(false);
+    const [dim1, setDim1]= useState(0);
+    const [dim2, setDim2]= useState(0);
+    const [tsp, setTsp]=useState(false);
     // Callback function to update the input value
     const handleInputChange = (value) => {
         setInputValue(value);
@@ -24,7 +27,15 @@ function Matrix(props){
         const newJoke = {
             text:inputValue,
         };
-        const response= await fetch(`https://matrix-calculator-backend.onrender.com/${e.target.value.slice(-3)}`, {
+        let rows = inputValue.split('\n'); // Split the string into rows
+        let numberArray = rows.map(row => row.split(/\s+/).filter(Boolean).map(Number));
+        console.log(numberArray);
+        let r=0;
+        let c=0;
+        r=numberArray.length;
+        c=numberArray[0].length;
+        // https://matrix-calculator-backend.onrender.com
+        const response= await fetch(`http://localhost:8000/${e.target.value.slice(-3)}`, {
             method:"POST",
             headers: { 
                 "Content-Type": "application/json",
@@ -34,13 +45,25 @@ function Matrix(props){
         })
         if (response.status === 200) {
             const ans = await response.json();
+            // console.log(r,c);
             if (ans[0]==="M"){
                 setError(true);
             }
             else{
                 setError(false);
             }
-            setAnswer(ans);
+            if (e.target.value.slice(-3)==="tsp"){
+                setTsp(true);
+                setDim1(r);
+                setDim2(c);
+                setAnswer(ans);
+            }
+            else{
+                setDim1(r);
+                setDim2(c);
+                setAnswer(ans);
+                setTsp(false);
+            }
             setModal(true);
         } else {
             console.error("Failed to add joke");
@@ -67,8 +90,8 @@ function Matrix(props){
     } 
     return (
         <div className="matrix">
-            {input?<p style={{textAlign:"center", fontSize:"20px", fontWeight:"bold", color:"white"}}>Matrix {props.name}</p>:<p style={{textAlign:"center", fontSize:"20px", fontWeight:"bold", color:"white"}}>Matrix {props.name}:{count}x{count}</p>}
-            {input?<TextArea error={error} cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange} className="input_area"/>:<InputBox error={error} cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange}/>}
+            {input?<p style={{textAlign:"center", fontSize:"20px", fontWeight:"bold", color:"white"}}>Matrix {props.name}</p>:<div className="input_box_heading"><p style={{textAlign:"center", fontSize:"clamp(1vw,20px,8vw)", fontWeight:"bold", color:"white", padding:"0px", margin:"0px"}}>Matrix {props.name}:{count}x{count}</p><p style={{textAlign:"center", fontSize:"clamp(1vw,15px,8vw)", fontWeight:"bold", color:"white", padding:"0px", margin:"5px", marginBottom:"20px"}}>(only for Square Matrices)</p></div>}
+            {input?<TextArea transpose={tsp} row={dim1} col={dim2} error={error} cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange} className="input_area"/>:<InputBox error={error} row={dim1} col={dim2} cnt={count} reset={clr} modal={modal} closeModal={closeModal} operation={operation} answer={answer} onInputChange={handleInputChange}/>}
             <div className="Buttons">
                 <button onClick={Opt}>{input?"Cell":"Box"}</button>
                 <button onClick={clear}>Clear</button>

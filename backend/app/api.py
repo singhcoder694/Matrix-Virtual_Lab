@@ -8,7 +8,7 @@ from pydantic import BaseModel
 app = FastAPI()
 
 origins = [
-    "https://matrix-calculator-frontend.onrender.com"
+    "http://localhost:3000"
 ]
 class JokeInput(BaseModel):
     text: str
@@ -181,7 +181,7 @@ async def cofactor(joke_input: JokeInput) :
         m = np.matrix(joke_input.text.replace('\n', ';'))
         return convert_to_1d_array(np.linalg.inv(m))
     except:
-        return ("The matrix is singular and doesnt have an inverse")
+        return ("Matrix is not compatible for inverse.")
 
 #problem 11
 @app.post("/trc", tags=["Trace"])
@@ -255,7 +255,7 @@ async def eigvct(joke_input: JokeInput) :
 @app.post("/ref", tags=["RowEchelonForm"])
 async def rowechfrm(joke_input: JokeInput) :
     try:
-        matrix=np.matrix(joke_input.text.replace("\n", ","))
+        matrix=np.matrix(joke_input.text.replace("\n", ";"))
         m, n = matrix.shape
         lead = 0
         for r in range(m):
@@ -285,7 +285,7 @@ async def rowechfrm(joke_input: JokeInput) :
 @app.post("/rre", tags=["RowReducedEchelon"])
 async def rowredech(joke_input: JokeInput) :
     try:
-        matrix=np.matrix(joke_input.text.replace("\n", ","))
+        matrix=np.matrix(joke_input.text.replace("\n", ";"))
         m, n = matrix.shape
         lead = 0
         for r in range(m):
@@ -327,7 +327,7 @@ async def ludecomp(joke_input: JokeInput) :
 async def diag(joke_input: JokeInput) :
     try:
         m = np.matrix(joke_input.text.replace('\n', ';'))
-        return [convert_to_1d_array((np.diag(m)))]      
+        return [convert_to_1d_array(np.diag((np.diag(m))))]      
     except:
         return ("Matrix not compatible for diagonalisation")
 

@@ -6,6 +6,7 @@
     bottom: 0px;
     z-index: 1;
     backdrop-filter: blur(10px);
+    overflow-y: scroll;
 }
 .modal{
     position: fixed;

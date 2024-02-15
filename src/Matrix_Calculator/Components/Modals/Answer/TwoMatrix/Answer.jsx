@@ -2,18 +2,8 @@ import React, {useState, useEffect} from 'react'
 
 function Answer_Matrix(array,row,col){
     var boxes = [];
-    let j=0;
-    let temp=0;
-    for (let i = 0; i < row; i++) {
-        boxes.push(<input className="box answer_box" key={i} value={array[i+temp]}></input>);
-        if (i===(row-1)){
-            i=-1;
-            j+=1;
-            temp+=col
-        }
-        if (j===col){
-            break;
-        }
+    for (let i = 0; i < row*col; i++) {
+        boxes.push(<input className="box answer_box" key={i} value={array[i]}></input>);
     }
     return boxes;
 }

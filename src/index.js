@@ -7,7 +7,6 @@ import {
     createBrowserRouter,
     RouterProvider,
 } from "react-router-dom";
-import Determinant from "./Matrix_Calculator/Determinant_Calculator/determinant";
 import Eigenvalues from "./Matrix_Calculator/Eigenvalues_Calculator/eigenvalue";
 const router = createBrowserRouter([
 {
@@ -17,10 +16,6 @@ const router = createBrowserRouter([
 {
     path: "/system-of-equations",
     element: <Equations />
-},
-{
-    path: "/determinant_calculator",
-    element: <Determinant />
 },
 {
     path: "/eigenvalue_calculator",

@@ -27,6 +27,23 @@ function Answer_Matrix(array, size) {
   }
   return boxes;
 }
+function New_Answer_Matrix(array, row, col){
+  var boxes=[]
+  if (row===1 && col===1){
+    for (let i = 0; i < row*col; i++) {
+      boxes.push(
+        <input className="box answer_box" key={1} value={array}></input>
+      );
+    }
+    return boxes;
+  }
+  for (let i = 0; i < row*col; i++) {
+    boxes.push(
+      <input className="box answer_box" key={i} value={array[i]}></input>
+    );
+  }
+  return boxes;
+}
 function evt_matrix(array, size) {
   var boxes = [];
   for (let i = 0; i < size; i++) {
@@ -35,6 +52,7 @@ function evt_matrix(array, size) {
         className="box answer_box"
         key={i}
         value={array[i][0] + " + (" + array[i][1] + ")j"}
+        style={{width:"150px", margin:"5px"}}
       ></input>
     );
   }
@@ -56,7 +74,7 @@ function evl_matrix(array, size) {
     if (i % 2 !== 0) {
       ans = array[i] + " j";
     }
-    boxes.push(<input className="box answer_box" key={i} value={ans}></input>);
+    boxes.push(<input className="box answer_box" key={i} value={ans} style={{width:"150px", margin:"5px"}}></input>);
   }
   return boxes;
 }
@@ -72,7 +90,7 @@ function valid_array(array) {
   return true;
 }
 function Answer(props) {
-  const { closeModal, input, answer } = props;
+  const { closeModal, input, answer, row, col, transpose } = props;
   const LUD = ["D", "L", "U"];
   const [array, setArray] = useState([]);
   useEffect(() => {
@@ -89,6 +107,30 @@ function Answer(props) {
   const gridStyle = {
     display: "grid",
     gridTemplateColumns: `repeat(${size}, fit-content(1000px))`, // Adjust the box width as needed
+    gridGap: "2px", // Adjust the gap between boxes as needed
+    placeItems: "center center",
+    margin: "auto auto",
+    padding: "5px 5px",
+    border: "1px solid white",
+    borderRadius: "0px",
+    borderTop: "none",
+    borderBottom: "none",
+  };
+  const new_gridStyle = {
+    display: "grid",
+    gridTemplateColumns: `repeat(${col}, fit-content(1000px))`, // Adjust the box width as needed
+    gridGap: "2px", // Adjust the gap between boxes as needed
+    placeItems: "center center",
+    margin: "auto auto",
+    padding: "5px 5px",
+    border: "1px solid white",
+    borderRadius: "0px",
+    borderTop: "none",
+    borderBottom: "none",
+  };
+  const transpose_new_gridStyle = {
+    display: "grid",
+    gridTemplateColumns: `repeat(${transpose ? row: col }, fit-content(1000px))`, // Adjust the box width as needed
     gridGap: "2px", // Adjust the gap between boxes as needed
     placeItems: "center center",
     margin: "auto auto",
@@ -124,7 +166,7 @@ function Answer(props) {
   const evtStyle2 = {
     display: "grid",
     gridTemplateColumns: `repeat(${
-      answer[0] ? answer[0].length + 1 : null
+      answer[0] ? answer.length + 1 : null
     }, auto)`, // Adjust the box width as needed
     gridGap: "30px", // Adjust the gap between boxes as needed
     placeItems: "center center",
@@ -147,17 +189,17 @@ function Answer(props) {
             <div className="modal">
               <p className="head">{props.operation}</p>
               <div className="answer">
-                <div className="ques_matrix" style={gridStyle}>
-                  {Answer_Matrix(array, size)}
+                <div className="ques_matrix" style={new_gridStyle}>
+                  {New_Answer_Matrix(array, row, col)}
                 </div>
                 <div className="equal_sign">=</div>
                 <div
                   className="ques_matrix"
-                  style={answer[0] ? gridStyle2 : gridStyle}
+                  style={answer[0] ? (transpose ? transpose_new_gridStyle : new_gridStyle) : gridStyle}
                 >
-                  {Answer_Matrix(
+                  {New_Answer_Matrix(
                     answer[0] ? answer[0] : answer,
-                    answer[0] ? size : 1
+                    answer[0] ? row : 1, answer[0] ? col : 1,
                   )}
                 </div>
               </div>
