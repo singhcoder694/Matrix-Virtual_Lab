@@ -41,18 +41,12 @@ function Home() {
       text1: inputValue,
       text2: inputValue2,
     };
-    for (let i = 0; i < Array.from(inputValue).length; i += 1) {
-      if (inputValue[i] === "\n") {
-        row += 1;
-      } else if (inputValue[i] === " ") {
-        continue;
-      } else if (row === 0) {
-        col += 1;
-      }
-    }
-    row += 1;
+    let rows = inputValue.split('\n'); // Split the string into rows
+    let numberArray = rows.map(row => row.split(/\s+/).filter(Boolean).map(Number));
+    row=numberArray.length;
+    col=numberArray[0].length;
     const response = await fetch(
-      `https://matrix-calculator-backend.onrender.com/${e.target.value.slice(-3)}`,
+      `http://localhost:8000/${e.target.value.slice(-3)}`,
       {
         method: "POST",
         headers: {

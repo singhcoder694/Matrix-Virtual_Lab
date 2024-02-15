@@ -3,6 +3,16 @@
     flex-direction: column;
     justify-items: center;
 }
+.input_box_heading{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.input_box_heading:first-child{
+    margin: 0;
+    padding: 0;
+}
  .matrix .input_area{
     width:200px;
     min-height:6em;
