@@ -29,13 +29,12 @@ function Matrix(props){
         };
         let rows = inputValue.split('\n'); // Split the string into rows
         let numberArray = rows.map(row => row.split(/\s+/).filter(Boolean).map(Number));
-        console.log(numberArray);
         let r=0;
         let c=0;
         r=numberArray.length;
         c=numberArray[0].length;
         // https://matrix-calculator-backend.onrender.com
-        const response= await fetch(`http://localhost:8000/${e.target.value.slice(-3)}`, {
+        const response= await fetch(`https://matrix-calculator-backend.onrender.com/${e.target.value.slice(-3)}`, {
             method:"POST",
             headers: { 
                 "Content-Type": "application/json",

@@ -46,7 +46,7 @@ function Home() {
     row=numberArray.length;
     col=numberArray[0].length;
     const response = await fetch(
-      `http://localhost:8000/${e.target.value.slice(-3)}`,
+      `https://matrix-calculator-backend.onrender.com/${e.target.value.slice(-3)}`,
       {
         method: "POST",
         headers: {
