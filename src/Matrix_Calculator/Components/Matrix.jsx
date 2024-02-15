@@ -29,7 +29,6 @@ function Matrix(props){
         };
         let rows = inputValue.split('\n'); // Split the string into rows
         let numberArray = rows.map(row => row.split(/\s+/).filter(Boolean).map(Number));
-        console.log(numberArray);
         let r=0;
         let c=0;
         r=numberArray.length;
